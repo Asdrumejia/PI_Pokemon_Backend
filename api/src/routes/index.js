@@ -4,6 +4,7 @@ const { Router } = require('express');
 const routesGetPokemons = require('./get/routesGetPokemons');
 const routesTypes = require('./get/routesGetTypes');
 const routesPostPokemon = require('./post/routesPostPokemon');
+const routesPutPokemon = require('./put/routesPutPokemon');
 
 
 
@@ -19,5 +20,8 @@ router.use('/pokemons', routesGetPokemons);
 router.use('/types', routesTypes);
 
 router.use('/pokemon', routesPostPokemon);
+
+router.use('/pokemon', routesPutPokemon);
+
 
 module.exports = router;
