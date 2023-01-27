@@ -40,38 +40,57 @@ const getApiInfo = async () => {
   return pokemonData;
 }
 
+const getDbInfo = async () => {
+  const dB = await Pokemon.findAll({
+     include: {
+        model: Type, 
+        attributes: ['name'],
+         through: {
+            attributes: [],  
+        }
+     }
+})
+   return dB;
+
+};
+
 
 const getDetail = async(id) => {
-  const apiData = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
-  const pokemon = await apiData.data
-  const pokemonData = {
-      id: pokemon.id,
-      name: pokemon.name,
-      image: pokemon.sprites.other.home.front_default,
-      hp: pokemon.stats[0].base_stat,
-      attack: pokemon.stats[1].base_stat,
-      defense: pokemon.stats[2].base_stat,
-      speed: pokemon.stats[5].base_stat,
-      height: pokemon.height,
-      weight: pokemon.weight,
-      types: pokemon.types.map(t => {
+  if(!isNaN(id)){
+    const apiData = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+    const poke = await apiData.data
+    const pokemonData = {
+      id: poke.id,
+      name: poke.name,
+      image: poke.sprites.other.home.front_default,
+      hp: poke.stats[0].base_stat,
+      attack: poke.stats[1].base_stat,
+      defense: poke.stats[2].base_stat,
+      speed: poke.stats[5].base_stat,
+      height: poke.height,
+      weight: poke.weight,
+      types: poke.types.map(t => {
         return ({
           name: t.type.name,
         })
       }),
-  }
-  return pokemonData;
-}
-
-
-const getDbInfo = async () => {
-  return await Pokemon.findAll({
-    include:{
-      model: Type,
-      attributes: ['name'],
-      through:{ attributes: [] },
     }
-  })
+    return pokemonData;
+  }
+  if(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(id)){
+    const responseDb = await Pokemon.findByPk(id, {
+        include: [
+          {
+            model: Type,
+            attributes: ["name"],
+            through: {
+              attributes: [],
+            },
+          },
+        ],
+      })
+    return  responseDb 
+ } 
 }
 
 

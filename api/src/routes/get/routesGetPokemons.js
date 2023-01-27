@@ -10,13 +10,13 @@ router.get('/', async (req, res) => {
     const pokemones = await getAllPokemons();
     try {
         if(name){
-            let poke = pokemones.filter(p => p.name.toLowerCase() === name.toLowerCase());
-            poke.length ? res.status(200).send(poke) : res.status(404).send('Pokemon not found')
+        let poke = pokemones.filter(p => p.name?.toLowerCase() == name?.toLowerCase());
+            poke.length !==0 ? res.status(200).send(poke) : res.status(404).send('Pokemon not found')
         }else{
            res.status(200).send(pokemones);
         }
     } catch (error) {
-        res.status(400).send(error.message)
+        res.status(404).send(error.message)
     }
 });
 
