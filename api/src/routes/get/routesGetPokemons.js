@@ -1,5 +1,5 @@
-const {Router} = require('express');
-const {getApiInfo, getDetail, getAllPokemons} = require('../../controllers/get/getPokemons');
+const { Router } = require('express');
+const { getPokemonsApi, getAllPokemons, getPokemonById } = require('../../controllers/get/getPokemons');
 
 
 const router = Router();
@@ -11,12 +11,12 @@ router.get('/', async (req, res) => {
     try {
         if(name){
         let poke = pokemones.filter(p => p.name?.toLowerCase() == name?.toLowerCase());
-            poke.length !==0 ? res.status(200).send(poke) : res.status(404).send('Pokemon not found')
+            poke.length !==0 ? res.status(200).send(poke) : res.status(404).send('Pokemon not found');
         }else{
            res.status(200).send(pokemones);
         }
     } catch (error) {
-        res.status(404).send(error.message)
+        res.status(404).send(error.message);
     }
 });
 
@@ -24,11 +24,11 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
 //  const id = req.params.id
     const {id} = req.params
-    const pokeDetail = await getDetail(id)
+    const pokeDetail = await getPokemonById(id);
     try {
-        res.status(200).send(pokeDetail)
+        res.status(200).send(pokeDetail);
     } catch (error) {
-        res.status(400).send(error.message)
+        res.status(400).send(error.message);
     }
 });
 

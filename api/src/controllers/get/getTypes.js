@@ -1,12 +1,12 @@
 const axios = require('axios');
-const { Type } = require("../../db");
+const { Type } = require('../../db');
 
 
-const getAllTypes = async () => {
-    let URL = "https://pokeapi.co/api/v2/type";
-    const dataTypes = await axios.get(URL)
-    const typesInfo = dataTypes.data
-    const types = typesInfo.results.map(t => t.name)
+const getTypes = async () => {
+    let URL = 'https://pokeapi.co/api/v2/type';
+    const dataTypes = await axios.get(URL);
+    const typesInfo = dataTypes.data;
+    const types = typesInfo.results.map(t => t.name);
     types.forEach(type => {
         Type.findOrCreate({
             where: {
@@ -15,10 +15,10 @@ const getAllTypes = async () => {
         })
     })
    const allTypes = await Type.findAll();
-   return allTypes
+   return allTypes;
 };
 
 
 module.exports = {
-    getAllTypes
+   getTypes
 }

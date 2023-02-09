@@ -7,11 +7,11 @@ const router = Router();
 
 router.delete('/:id', async (req, res) => {
     try {
-       const {id} = req.params
-       const deleted = await deletePokemon(id)
-     res.status(200).send("Pokemon successfully deleted")
+       const {id} = req.params;
+       const pokemonDeleted = await deletePokemon(id);
+     res.status(200).send('Pokemon successfully deleted');
     } catch (error) {
-        res.status(404).send(error.message)
+        res.status(404).send(error.message);
     }
 });
 

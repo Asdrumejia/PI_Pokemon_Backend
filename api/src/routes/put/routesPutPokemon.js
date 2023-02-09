@@ -4,18 +4,19 @@ const { putPokemon } = require('../../controllers/put/putPokemon');
 
 const router = Router();
 
+
 router.put('/:id', async (req, res) => {
     try {
        const {id} = req.params
-       const {name, image, hp, attack, defense, speed, height, weight, types} = req.body 
-       if(!name || !image || !hp || !attack || !defense || !speed || !height || !weight || !types){
-          res.status(404).send("Missing data to modify this pokemon")
+       const { name, hp, attack,  defense,  speed, height, weight, types, image } = req.body;
+       if(!name || !hp || !attack || !defense || !speed || !height || !weight || !types || !image){
+          res.status(404).send("Missing data to modify this pokemon");
        }else{
-          const recipeUpdated = await putPokemon(id, name, image, hp, attack, defense, speed, height, weight, types)
-          res.status(200).send("Successfully modified pokemon")
+          const pokemonUpdated = await putPokemon(id, name, hp, attack,  defense,  speed, height, weight, types, image);
+          res.status(200).send('Successfully modified pokemon')
        }
     } catch (error) {
-        res.status(404).send(error.message)
+        res.status(404).send(error.message);
     }
 });
 

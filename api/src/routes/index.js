@@ -1,11 +1,11 @@
 const { Router } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-const routesGetPokemons = require('./get/routesGetPokemons');
-const routesTypes = require('./get/routesGetTypes');
-const routesPostPokemon = require('./post/routesPostPokemon');
-const routesPutPokemon = require('./put/routesPutPokemon');
-const routesDeletePokemon = require('./delete/routesDeletePokemon');
+const getPokemons = require('./get/routesGetPokemons');
+const getTypes = require('./get/routesGetTypes');
+const postPokemon = require('./post/routesPostPokemon');
+const putPokemon = require('./put/routesPutPokemon');
+const deletePokemon = require('./delete/routesDeletePokemon');
 
 
 const router = Router();
@@ -15,15 +15,15 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 
-router.use('/pokemons', routesGetPokemons);
+router.use('/pokemons', getPokemons);
 
-router.use('/types', routesTypes);
+router.use('/types', getTypes);
 
-router.use('/pokemon', routesPostPokemon);
+router.use('/pokemon', postPokemon);
 
-router.use('/pokemon', routesPutPokemon);
+router.use('/pokemon', putPokemon);
 
-router.use('/pokemon', routesDeletePokemon);
+router.use('/pokemon', deletePokemon);
 
 
 module.exports = router;
