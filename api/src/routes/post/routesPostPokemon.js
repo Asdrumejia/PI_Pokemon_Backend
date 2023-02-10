@@ -6,7 +6,7 @@ const router = Router();
 
 
 router.post('/', async (req, res) => {
-    const { name, hp, attack,  defense,  speed, height, weight, types, image } = req.body;
+    const {name, hp, attack,  defense,  speed, height, weight, types, image} = req.body;
     try {
         if (!name || !hp || !attack || !defense || !speed || !height || !weight || !types  || !image){
           return res.status(404).send('Missing data to create Pokemon');

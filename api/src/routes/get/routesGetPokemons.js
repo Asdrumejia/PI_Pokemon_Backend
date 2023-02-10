@@ -22,8 +22,8 @@ router.get('/', async (req, res) => {
 
 
 router.get('/:id', async (req, res) => {
-//  const id = req.params.id
-    const {id} = req.params
+//  const id = req.params.id;
+    const {id} = req.params;
     const pokeDetail = await getPokemonById(id);
     try {
         res.status(200).send(pokeDetail);
