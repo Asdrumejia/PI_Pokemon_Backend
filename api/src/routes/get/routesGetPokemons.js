@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
     try {
         res.status(200).send(pokeDetail);
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(404).send(error.message);
     }
 });
 

@@ -42,13 +42,10 @@ const getDbInfo = async () => {
      include: {
         model: Type, 
         attributes: ['name'],
-         through: {
-            attributes: [],  
-        }
+         through: {attributes: []}
      }
 })
    return dB;
-
 };
 
 
@@ -66,7 +63,7 @@ const getPokemonById = async(id) => {
         height: poke.height,
         weight: poke.weight,
         types: poke.types.map(t => t.type.name).join(', '),
-        image: poke.sprites.other.home.front_default,
+        image: poke.sprites.other.home.front_default
     }
     return pokemonData;
   }
@@ -76,11 +73,9 @@ const getPokemonById = async(id) => {
           {
             model: Type,
             attributes: ["name"],
-            through: {
-              attributes: [],
-            },
-          },
-        ],
+            through: {attributes: []}
+          }
+        ]
       })
     return  responseDb;
   }

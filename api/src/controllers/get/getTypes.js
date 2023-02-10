@@ -9,9 +9,7 @@ const getTypes = async () => {
     const types = typesInfo.results.map(t => t.name);
     types.forEach(type => {
         Type.findOrCreate({
-            where: {
-                name: type
-            }
+            where: { name: type }
         })
     })
    const allTypes = await Type.findAll();
